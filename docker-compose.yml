@@ -47,8 +47,28 @@ services:
     image: lab1
     ports:
       - '8080:8080'
+    expose:
+      - '8080'
     depends_on:
       - 'kafka'
+  data-store:
+    image: lab2
+    ports:
+      - '8090:8090'
+    depends_on:
+      - db
+      - kafka
+  processor:
+    image: lab3
+    ports:
+      - '8100:8100'
+  audit_log:
+    image: lab5
+    ports:
+      - '8110:8110'
+    depends_on:
+      - kafka
+      
 # Names our volume
 volumes:
   my-db:
